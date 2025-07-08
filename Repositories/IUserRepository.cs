@@ -1,7 +1,25 @@
-﻿namespace Chat_Application.Repositories
+﻿using Chat_Application.Models;
+
+namespace Chat_Application.Repositories
 {
     public interface IUserRepository
     {
+
+        Task<User> FindUsersAsync();
+
+        Task<User> FindUserByIdAsync(Guid userId);
+
+        Task<User> FindUserByEmailAsync(string email);
+
+        Task AddUser(User user);
+
+        Task DeleteUser(Guid id);
+
+        Task UpdateUser(User user);
+
+
+
+
 
 
 
