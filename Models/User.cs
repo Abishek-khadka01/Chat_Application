@@ -32,7 +32,7 @@ public partial class User
     [Column("refresh_token")]
     public string? RefreshToken { get; set; }
 
-    [Column("refresh_token_expires_at", TypeName = "timestamp without time zone")]
+    [Column("refresh_token_expires_at")]
     public DateTime? RefreshTokenExpiresAt { get; set; }
 
     [Column("profile_picture_url")]

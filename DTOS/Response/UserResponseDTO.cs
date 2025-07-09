@@ -16,7 +16,7 @@ namespace Chat_Application.DTOS.Response
             id = user.Id;
             Username = user.Username;
             Email = user.Email;
-            ProfilePicture = user.ProfilePictureUrl ?? string.Empty; // Handle null case for profile picture
+            ProfilePicture = user.ProfilePictureUrl ?? string.Empty; 
         }
 
 

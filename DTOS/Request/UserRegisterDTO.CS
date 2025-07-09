@@ -22,7 +22,7 @@ namespace Chat_Application.DTOS.Request
         public string Password { get; set; } = null!;
 
 
-        public string ProfilePicture { get; set; } = null!; 
+        public string ProfilePicture { get; set; } = String.Empty; 
 
     }
 }

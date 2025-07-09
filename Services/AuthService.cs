@@ -50,7 +50,7 @@ namespace Chat_Application.Services
                 expires: DateTime.UtcNow.AddDays(7),
                 signingCredentials: new SigningCredentials(signingkey, SecurityAlgorithms.HmacSha256)
             );
-
+                Console.WriteLine("Refresh Token Generated", token);
 
             return new JwtSecurityTokenHandler().WriteToken(token); 
 
@@ -67,6 +67,7 @@ namespace Chat_Application.Services
         public string GenerateAccessToken(User user)
         {
             var secretkey = _configuration["AcessTokenSecret"];
+
             var signingkey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretkey));
             var claims = new[]
             {

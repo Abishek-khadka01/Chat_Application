@@ -56,13 +56,17 @@ namespace Chat_Application.Services
                 : Task.FromResult(false);
         }
 
-        public Task<IEnumerable<User>> FindUsersAsyncPagination(int page = 0)
+        public Task<IEnumerable<User>> FindUsersAsyncPagination(int page = 1)
         {
             int limit = 10;
             var offset = page * limit;
             List<User> users = _repository.FindUsersAsync().Result.ToList();
 
             List<User> Result = new List<User>();
+                if(users.Count < limit)
+            {
+                return Task.FromResult<IEnumerable<User>>(users);   
+            }
 
             for (int i = offset; i < (offset + limit); i++)
             {
