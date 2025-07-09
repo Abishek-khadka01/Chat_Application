@@ -111,7 +111,13 @@ namespace Chat_Application.Controllers
                 _logger.LogInformation("User {Username} logged in successfully", user.Username);
 
 
-                return Ok("User login Successfully");
+                return Ok(new ApiResponse(true, "User Login Successful", new
+                {
+                    user = new UserResponseDTO(user),
+                    refreshtoken = RefreshToken,
+                    accessToken = AccessToken
+
+                }));
 
 
             }
