@@ -26,9 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="DTOS\Response\" />
-    <Folder Include="DTOS\Request\" />
     <Folder Include="Middlewares\" />
   </ItemGroup>
 

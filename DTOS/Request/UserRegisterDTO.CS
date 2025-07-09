@@ -21,5 +21,8 @@ namespace Chat_Application.DTOS.Request
         [MinLength(8, ErrorMessage = "The password should be of at least 8 characters")]
         public string Password { get; set; } = null!;
 
+
+        public string ProfilePicture { get; set; } = null!; 
+
     }
 }

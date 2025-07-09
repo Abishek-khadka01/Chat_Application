@@ -1,9 +1,9 @@
-﻿namespace Chat_Application.DTOS.Request
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Chat_Application.DTOS.Request
 {
     public class UserLoginDTO
     {
-
-
         [StringLength(100)]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         [Required(ErrorMessage = "Email is required")]

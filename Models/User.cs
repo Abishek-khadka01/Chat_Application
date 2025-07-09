@@ -29,6 +29,15 @@ public partial class User
     [Column("created_at", TypeName = "timestamp without time zone")]
     public DateTime? CreatedAt { get; set; }
 
+    [Column("refresh_token")]
+    public string? RefreshToken { get; set; }
+
+    [Column("refresh_token_expires_at", TypeName = "timestamp without time zone")]
+    public DateTime? RefreshTokenExpiresAt { get; set; }
+
+    [Column("profile_picture_url")]
+    public string? ProfilePictureUrl { get; set; }
+
     [InverseProperty("User")]
     public virtual ICollection<ConversationMember> ConversationMembers { get; set; } = new List<ConversationMember>();
 

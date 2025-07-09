@@ -5,7 +5,7 @@ namespace Chat_Application.Repositories
     public interface IUserRepository
     {
 
-        Task<User> FindUsersAsync();
+        Task<List<User>> FindUsersAsync();
 
         Task<User> FindUserByIdAsync(Guid userId);
 
@@ -18,7 +18,7 @@ namespace Chat_Application.Repositories
         Task UpdateUser(User user);
 
 
-
+        Task<IEnumerable<User>> FindUserByUsernameAsync(string username);
 
 
 

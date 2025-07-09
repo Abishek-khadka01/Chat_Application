@@ -80,7 +80,7 @@ namespace Chat_Application.Services
                 issuer: _configuration["Issuer"],
                 audience: _configuration["Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddDays(7),
+                expires: DateTime.UtcNow.AddMinutes(15),
                 signingCredentials: new SigningCredentials(signingkey, SecurityAlgorithms.HmacSha256)
             );
 
