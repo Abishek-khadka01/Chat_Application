@@ -65,7 +65,7 @@ namespace Chat_Application.Services
             List<User> Result = new List<User>();
                 if(users.Count < limit)
             {
-                return Task.FromResult<IEnumerable<User>>(users);   
+                return Task.FromResult<IEnumerable<User>>(users); 
             }
 
             for (int i = offset; i < (offset + limit); i++)
