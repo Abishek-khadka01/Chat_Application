@@ -1,4 +1,4 @@
-﻿namespace Chat_Application.Repositories
+﻿namespace Chat_Application.Interface
 {
     public class IMessageRepository
     {

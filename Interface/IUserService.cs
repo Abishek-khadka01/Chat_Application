@@ -1,6 +1,6 @@
 ﻿using Chat_Application.Models;
 
-namespace Chat_Application.Services
+namespace Chat_Application.Interface
 {
     public interface IUserService
     {

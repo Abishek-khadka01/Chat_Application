@@ -1,4 +1,4 @@
-﻿namespace Chat_Application.Services
+﻿namespace Chat_Application.Interface
 {
     public class IMessageService
     {

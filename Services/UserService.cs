@@ -1,7 +1,7 @@
 ﻿using Chat_Application.Models;
 using Chat_Application.Repositories;
 using System.Runtime.InteropServices;
-
+using Chat_Application.Interface;
 namespace Chat_Application.Services
 {
     public class UserService : IUserService

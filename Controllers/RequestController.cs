@@ -68,9 +68,9 @@ namespace Chat_Application.Controllers
 
                 _requestService.AddRequest(newRequest);
 
-                return Ok(new ApiResponse(true, "Request Send Successfully", newRequest) );
-                
-            
+                return Ok(new ApiResponse(true, "Request Send Successfully", newRequest));
+
+
 
 
 
@@ -86,8 +86,8 @@ namespace Chat_Application.Controllers
 
         }
 
+
+
+
     }
-
-
-
 }

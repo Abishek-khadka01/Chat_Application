@@ -1,6 +1,7 @@
 using Chat_Application.Models;
 using Chat_Application.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Chat_Application.Interface;
 namespace Chat_Application.Services
 {
     public class RequestService : IRequestService

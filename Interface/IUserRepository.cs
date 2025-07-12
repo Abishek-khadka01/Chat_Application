@@ -1,6 +1,6 @@
 ﻿using Chat_Application.Models;
 
-namespace Chat_Application.Repositories
+namespace Chat_Application.Interface
 {
     public interface IUserRepository
     {

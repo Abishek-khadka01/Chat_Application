@@ -1,6 +1,7 @@
 using Chat_Application.Data;
 using Chat_Application.Models;
 using Microsoft.EntityFrameworkCore;
+using Chat_Application.Interface;
 namespace Chat_Application.Repositories
 {
 

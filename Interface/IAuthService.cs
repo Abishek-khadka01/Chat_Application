@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 
 
-namespace Chat_Application.Services
+namespace Chat_Application.Interface 
 {
     public interface IAuthService
     {
