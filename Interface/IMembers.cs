@@ -9,10 +9,11 @@ namespace Chat_Application.Interface
 
         Task<bool> ConversationExists(Guid ConversationID);
 
-        Task<IEnumerable<ConversationMember>> GetConversationMembers(Guid conversationID);
-
-        Task<IEnumerable<ConversationMember>> GetMembersPtoP(Guid conversationID);
+        Task<IEnumerable<User>> GetMembersPtoP(Guid userID);
 
         Task<IEnumerable<Guid>> GetUserID(Guid ConversationID);
+
+        Task<IEnumerable<User>> GetGroupMembers(Guid groupId, Guid userid );
+        
     }
 }

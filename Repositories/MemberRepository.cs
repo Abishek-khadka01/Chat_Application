@@ -7,13 +7,13 @@ namespace Chat_Application.Repositories
     public class MemberRepository : IMemberRepository
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserRepository _userRepository;
+       
 
         private readonly ConversationRepository _conversationRepository;
         public MemberRepository(ApplicationDbContext context, UserRepository repository, ConversationRepository conversation)
         {
             _context = context;
-            _userRepository = repository;
+        
             _conversationRepository = conversation;
         }
 
@@ -32,23 +32,22 @@ namespace Chat_Application.Repositories
         }
 
 
-        public async Task<IEnumerable<ConversationMember>> GetConversationMembers(Guid conversationID)
-        {
-            return await _context.ConversationMembers.Where(convo =>
-            convo.ConversationId == conversationID).ToListAsync();
-        }
+       
 
-        public async Task<IEnumerable<ConversationMember>> GetMembersPtoP(Guid userId)
-        {
+                public async Task<IEnumerable<User>> GetMembersPtoP(Guid userId)
+            {
+                var result = await (
+                    from convomembers in _context.ConversationMembers
+                    join conversations in _context.Conversations
+                        on convomembers.ConversationId equals conversations.Id
+                    join user in _context.Users
+                        on convomembers.UserId equals user.Id
+                    where conversations.IsGroup == false && convomembers.UserId != userId
+                    select user
+                ).ToListAsync();
 
-            var result = await (from convomembers in _context.ConversationMembers
-                                join conversations in _context.Conversations
-                               on convomembers.ConversationId equals conversations.Id
-                                where conversations.IsGroup == false
-                                select convomembers).ToListAsync();
-
-
-            return result;
+                return result;
+            
 
                         /*
 
@@ -68,7 +67,22 @@ on conversation_members.conversationid == conversation.id && conversation.isgrou
             convo.UserId).ToListAsync();
         }
 
-       
+        public async Task<IEnumerable<User>> GetGroupMembers(Guid GroupId, Guid userID)
+        {
+            var result = await (from conversation in _context.Conversations
+                                join convomembers in _context.ConversationMembers
+                                on conversation.Id equals convomembers.ConversationId
+                                join users in _context.Users
+                                on convomembers.UserId equals users.Id
+                                where conversation.Id == GroupId && conversation.IsGroup == true
+                                && convomembers.UserId != userID
+                select users 
+                
+                
+                ).ToListAsync();
+
+            return result.Distinct();
+       }
 
     }
 }
