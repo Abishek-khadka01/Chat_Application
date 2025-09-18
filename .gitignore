@@ -1,0 +1,50 @@
+# .NET 9 / .NET Core / ASP.NET Core
+bin/
+obj/
+out/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# NuGet packages
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+*.nuspec
+
+# Build results
+*.dll
+*.exe
+*.app
+*.log
+
+# Test results
+TestResults/
+*.coverage
+*.coveragexml
+
+# Entity Framework
+Migrations/
+
+# Rider
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Others
+*.vspscc
+*.vssscc
+_ReSharper*/
+*.resharper
+*.DotSettings.user
+*.dotCover
+*.dotTrace
+*.dotMemory
+*.orig
