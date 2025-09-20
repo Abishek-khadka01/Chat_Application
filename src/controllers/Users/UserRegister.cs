@@ -1,9 +1,9 @@
 
 
-namespace Chat_Application.src.Controllers.Auth
+using chat_application.Models;
+
+namespace Chat_Application.src.Controllers.Users
 {
-
-
 
     public static class UserRegister
     {
@@ -15,10 +15,10 @@ namespace Chat_Application.src.Controllers.Auth
 
             public UserRegisterValidator()
             {
-                RuleFor(x => x.Username.Trim())
+                RuleFor(x => x.Username)
                 .NotEmpty().WithMessage("The Username cannot be null or empty")
                 .MinimumLength(5).WithMessage("The minimum length of the message should be 5");
-
+                
 
                 RuleFor(x => x.Email)
                 .EmailAddress().WithMessage("The email must be valid email address ")
@@ -30,55 +30,72 @@ namespace Chat_Application.src.Controllers.Auth
             .NotNull().WithMessage("The password cannot be null");
             }
 
-
         }
 
 
-        // public static async Task<Results<Ok<SuccessFulResponse>>, NotFound<string>, StatusCodeHttpResult<ErrorResponse>> RegisterUserAsync(
-        //     UserRegisterRequest request, 
-        //     AppDbContext dbContext, 
-        //     CancellationToken cancellationToken
-
-        // )
-        // {
-
-        //     try
-        //     {
-            
-
-
-        //     }
-        //     catch (TaskCanceledException token)
-        //     {
-        //         Log.Error("The processs was cancelled by the user ");
-
-        //     }
-
-        //     catch (System.Exception error)
-        //     {
-        //         Log.Error($"Error in registering the user  {error.Message}");
-        //         return TypedResults.InternalServerError(new ErrorResponse(false, error.Message));
-
-        //     }
-
-        // }
-
-
-
-            
-        
-
-
-        private static async Task RegisterUserDB(UserRegisterRequest  request , AppDbContext context)
+        public static async Task<IResult> RegisterUserAsync(
+            UserRegisterRequest request, 
+            AppDbContext dbContext, 
+            CancellationToken cancellationToken
+        )
         {
-            
+
+            try
+            {
+
+                Log.Information("User Register EndPoint is running ");
+
+                var UserExists = await CommonUserOperations.FindUserbyEmail(dbContext, request.Email.ToLower(), cancellationToken);
+
+                if (UserExists != null)
+                {
+                    Log.Warning($"The user with the same mail already  exists  ");
+                   return  TypedResults.Conflict(new ErrorResponse(false, "User with same email already exists"));
+                }
+
+
+                await RegisterUserDB(request, dbContext, cancellationToken);
+
+
+                return TypedResults.Ok(new SuccessFulResponse<string>(true, "User is registered successfully", ""));
+
+            }
+            catch (TaskCanceledException)
+            {
+                Log.Error("The processs was cancelled by the user ");
+                return TypedResults.StatusCode(499);
+
+            }
+
+            catch (System.Exception error)
+            {
+                Log.Error($"Error in registering the user  {error.Message}");
+                return TypedResults.InternalServerError(new ErrorResponse(false, error.Message));
+
+            }
+
         }
 
+
+
+
+
+        private static async Task RegisterUserDB(UserRegisterRequest request, AppDbContext context, CancellationToken cancellationToken)
+        {
+
+            var user = new User
+            {
+                Username = request.Username.ToLower(),
+                Email = request.Email.ToLower(),
+                Password = request.Password // todo : hash the password 
+
+            };
+
+            context.Users.Add(user);
+            await context.SaveChangesAsync(cancellationToken);
+
+        }
 
     }
-
-
-
-
 
 }
