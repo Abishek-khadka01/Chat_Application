@@ -50,7 +50,7 @@ namespace Chat_Application.src.Controllers.Users
                 if (UserExists != null)
                 {
                     Log.Warning($"The user with the same mail already  exists  ");
-                   return  TypedResults.Conflict(new ErrorResponse(false, "User with same email already exists"));
+                   return  TypedResults.Conflict(new ErrorResponse("User with same email already exists"));
                 }
 
 
@@ -70,7 +70,7 @@ namespace Chat_Application.src.Controllers.Users
             catch (System.Exception error)
             {
                 Log.Error($"Error in registering the user  {error.Message}");
-                return TypedResults.InternalServerError(new ErrorResponse(false, error.Message));
+                return TypedResults.InternalServerError(new ErrorResponse( error.Message));
 
             }
 

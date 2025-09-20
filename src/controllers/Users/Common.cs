@@ -1,11 +1,10 @@
 // This file contains all the db operations that can be used by multiple files  of the user 
 
-using System.Text.RegularExpressions;
 
 namespace Chat_Application.src.Controllers.Users
 {
 
-    
+
     public static class CommonUserOperations
     {
         public record UserResponseDTO(string Username, string Email, string UserID, string ProfilePicture, string ProfileID, string CreatedAt);
@@ -38,25 +37,29 @@ namespace Chat_Application.src.Controllers.Users
 
 
 
-        public static async Task<UserResponseDTO> FindUserbyEmail(AppDbContext context, string email, CancellationToken cancellationToken)
+        public static async Task<object> FindUserbyEmail(AppDbContext context, string email, CancellationToken cancellationToken)
         {
             return await (from Users in context.Users
                           join Profile in context.Profiles
               on Users.Id equals Profile.Userid
-                          where Users.Email == email
-                          select new UserResponseDTO(
+                          where Users.Email == email.ToLower()
+                          select new
+                          {
                               Users.Username,
                               Users.Email,
-                              Users.Id.ToString(),
+                              Users.Id,
                               Profile.Picture,
-                              Profile.Id.ToString(),
-                              Users.CreatedAt.ToString())
+                              Users.CreatedAt,
+                              Users.Password,
+                              ProfileID = Profile.Id
 
 
-                     ).FirstAsync(cancellationToken);
+                          }).FirstOrDefaultAsync(cancellationToken) ;
+
+
+
+
 
         }
- 
-
     }
 }

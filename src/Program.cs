@@ -1,5 +1,5 @@
-global using Serilog;
-using System.ComponentModel;
+
+
 using Chat_Application.Routes;
 
 
@@ -12,8 +12,10 @@ using var log = new LoggerConfiguration()
     .CreateLogger();
 
 //add the db context 
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Default"))
 
-
+);
 // add the rate limiting 
 
 
@@ -25,6 +27,17 @@ builder.Services.AddCors(options =>
   ));
 
 
+// // authentication 
+// builder.Services.AddAuthentication(options =>
+// {
+//     options.DefaultAuthenticateScheme =  
+
+
+// });
+
+
+
+// authorization 
 builder.Services.AddAuthorization();
 
 
@@ -36,5 +49,6 @@ app.UseSwaggerUI();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors();
 app.MapUserEndPoints();
 app.Run();
