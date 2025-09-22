@@ -1,6 +1,7 @@
 
 
 using Chat_Application.Routes;
+using StackExchange.Redis;
 
 
 
@@ -35,6 +36,17 @@ builder.Services.AddCors(options =>
 
 // });
 
+//Adding the redis connection 
+builder.Services.AddSingleton<IConnectionMultiplexer>(options=>
+{
+    var  config = new ConfigurationOptions
+    {
+        EndPoints = { "localhost:6379" },
+        User = "yourUsername",
+        Password = "yourPassword"
+    };
+    return ConnectionMultiplexer.Connect(config);
+});
 
 
 // authorization 
