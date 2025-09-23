@@ -1,5 +1,4 @@
 
-
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
@@ -11,6 +10,7 @@ namespace Chat_Application.src.common
     {
         public bool ValidateToken(string token, string SecretKey, out JwtSecurityToken jwtToken)
         {
+            Log.Information("The validation token is running ");
             var validationParameters = new TokenValidationParameters
             {
 
